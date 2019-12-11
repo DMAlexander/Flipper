@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import java.util.Calendar;
 import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -41,20 +42,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
 
     }
 
     private static final String createTable = "CREATE TABLE " + TABLE_NAME + " "
             + " ( " + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_DATE_PURCHASED + " DATE, "
+            + COLUMN_ITEM_NAME + " TEXT, "
+            + COLUMN_DATE_PURCHASED + " TEXT, "
             + COLUMN_PRICE_PURCHASED + " REAL, "
-            + COLUMN_DAYS_OWNED + " DATE, "
+            + COLUMN_PROJECTED_PRICE + " REAL, "
+            + COLUMN_PROJECTED_VALUE + " REAL, "
             + COLUMN_IS_SOLD + " BOOLEAN, "
             + COLUMN_PRICE_SOLD + " REAL, "
             + COLUMN_PRICE_PROFIT + " REAL, "
-            + COLUMN_DATE_SOLD + " REAL, "
-            + COLUMN_ITEM_NAME + " TEXT, "
+            + COLUMN_DATE_SOLD + " TEXT, "
             + COLUMN_PLATFORM_TO_SELL_ON + " TEXT, "
             + COLUMN_PERCENTAGE_OF_CUT_TAKEN + " TEXT ) ";
 
@@ -80,16 +82,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addItemOwnedData(String itemName, String datePurchased, double pricePurchased, double projPrice, double projValue, String isSold, String dateSold) {
+    public boolean addItemOwnedData(String itemName, String datePurchased, double pricePurchased, double projPrice, double projValue) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_ITEM_NAME, itemName);
         contentValues.put(COLUMN_DATE_PURCHASED, datePurchased);
-        contentValues.put(COLUMN_PRICE_PURCHASED, pricePurchased);
-        contentValues.put(COLUMN_PROJECTED_PRICE, projPrice);
-        contentValues.put(COLUMN_PROJECTED_VALUE, projValue);
-        contentValues.put(COLUMN_IS_SOLD, isSold); //should be 'N' by default
-        contentValues.put(COLUMN_DATE_SOLD, dateSold); //should be null by default
+        contentValues.put(COLUMN_PRICE_PURCHASED, pricePurchased); //What we bought it for
+        contentValues.put(COLUMN_PROJECTED_PRICE, projPrice);       //What we think it's worth
+        contentValues.put(COLUMN_PROJECTED_VALUE, projValue);       //The potental profit...
 
         Log.d(TAG, "addData: Adding " + itemName + " to " + TABLE_NAME);
 

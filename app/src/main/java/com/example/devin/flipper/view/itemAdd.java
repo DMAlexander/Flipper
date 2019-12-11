@@ -21,6 +21,10 @@ import com.example.devin.flipper.R;
 import com.example.devin.flipper.database.DatabaseHelper;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class itemAdd extends AppCompatActivity {
 
@@ -44,11 +48,16 @@ public class itemAdd extends AppCompatActivity {
         projValue = (EditText) findViewById(R.id.projValue);
 
         datePurchased = (TextView) findViewById(R.id.datePurchased);
-        projProfit = (TextView) findViewById(R.id.projProfit);
+   //     projProfit = (TextView) findViewById(R.id.projProfit);
 
         btnAddItem = (Button) findViewById(R.id.btnAddItem);
 
         mDatabaseHelper = new DatabaseHelper(this );
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        final String currentDate = sdf.format(new Date());
+        //   Date currentTime = Calendar.getInstance().getTime();
+        datePurchased.setText(currentDate);
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +67,9 @@ public class itemAdd extends AppCompatActivity {
                 itemNameText = itemName.getText().toString();
                 purchasePriceText = purchasePrice.getText().toString();
                 projValueText = projValue.getText().toString();
-                datePurchasedText = datePurchased.getText().toString();
-                projProfitText = projProfit.getText().toString();
+
+//                datePurchasedText = datePurchased.getText().toString();
+//                projProfitText = projProfit.getText().toString();
 
                 double purchasePrice = Double.valueOf(purchasePriceText);
                 double projValue = Double.valueOf(projValueText);
@@ -69,7 +79,7 @@ public class itemAdd extends AppCompatActivity {
                 double projProfitValue = projValue - purchasePrice;
 
                 if(itemNameText.length()!=0 && purchasePriceText != null && projValueText != null) {
-                    insertItem(itemNameText, datePurchasedText, purchasePrice, projValue, projProfitValue);
+                    insertItem(itemNameText, currentDate, purchasePrice, projValue, projProfitValue);
                 } else {
                     toastMessage( "Please put something in the textbox!" );
                 }
@@ -77,26 +87,26 @@ public class itemAdd extends AppCompatActivity {
         });
     }
 
-    public void insertItem( String itemNameText, String datePurchasedText, double purchasePrice,
-                            double projValue, double projProfit ) {
+    public void insertItem( String itemNameText, String currentDate, double purchasePrice,
+                            double projValue, double projProfitValue ) {
 
         String lowerCaseItemName = itemNameText.toLowerCase();
 
-        boolean insertData = mDatabaseHelper.addItemOwnedData( lowerCaseItemName, datePurchasedText, purchasePrice, projProfit, projValue, "N", null );
+        boolean insertData = mDatabaseHelper.addItemOwnedData( lowerCaseItemName, currentDate, purchasePrice, projValue, projProfitValue );
 
         if ( insertData ) {
             toastMessage( "Data successfully inserted!" );
-
+/*
             Cursor data = mDatabaseHelper.getItemId( lowerCaseItemName );
             int itemID = -1;
             while ( data.moveToNext() ) {
                 itemID = data.getInt(0);
             }
             toastMessage( "The recipieID is: " + itemID );
-
-            Intent intent = new Intent(itemAdd.this, currentInventory.class );
-            intent.putExtra("ItemId", itemID );
-            startActivity( intent );
+*/
+//            Intent intent = new Intent(itemAdd.this, currentInventory.class );
+        //    intent.putExtra("ItemId", itemID );
+//            startActivity( intent );
         } else {
             toastMessage( "Something went wrong!" );
         }
