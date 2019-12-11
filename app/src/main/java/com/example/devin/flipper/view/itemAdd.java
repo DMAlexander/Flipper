@@ -20,118 +20,86 @@ import com.example.devin.flipper.MainActivity;
 import com.example.devin.flipper.R;
 import com.example.devin.flipper.database.DatabaseHelper;
 
+import java.text.DecimalFormat;
+
 public class itemAdd extends AppCompatActivity {
 
     private static final String TAG = "itemAdd";
 
     DatabaseHelper mDatabaseHelper;
-    private Button btnRecipeAdd;
-    private EditText editRecipieText;
-    private int selectedRecipieFolderID;
-    ImageButton mImageBtn;
-    RadioGroup radioGroup;
-    RadioButton radioButton;
-    TextView textView;
-    TextView mCountTv;
-    MenuItem mCartIconMenuItem;
+    private EditText itemName, purchasePrice, projValue;
+    private TextView datePurchased, projProfit;
+    private Button btnAddItem;
+    String itemNameText, purchasePriceText, projValueText, datePurchasedText, projProfitText;
+
+    DecimalFormat currency = new DecimalFormat("$###,###.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_add);
 
- //       btnRecipeAdd = (Button) findViewById( R.id.btnRecipieAdd );
- //       editRecipieText = (EditText) findViewById( R.id.editRecipieText );
- //       mDatabaseHelper = new DatabaseHelper(this );
+        itemName = (EditText) findViewById(R.id.itemName);
+        purchasePrice = (EditText) findViewById(R.id.purchPrice);
+        projValue = (EditText) findViewById(R.id.projValue);
 
- //       radioGroup = findViewById( R.id.radioGroup );
+        datePurchased = (TextView) findViewById(R.id.datePurchased);
+        projProfit = (TextView) findViewById(R.id.projProfit);
 
-        btnRecipeAdd.setOnClickListener(new View.OnClickListener() {
+        btnAddItem = (Button) findViewById(R.id.btnAddItem);
+
+        mDatabaseHelper = new DatabaseHelper(this );
+
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent recievedIntent = getIntent();
-                selectedRecipieFolderID = recievedIntent.getIntExtra("FolderID", -1 );
-                Log.d( TAG, "recipie folder id value is: " + selectedRecipieFolderID );
 
-                int radioId = radioGroup.getCheckedRadioButtonId();
-                radioButton = findViewById( radioId );
-                Log.d( TAG, "Your choice: " + radioButton.getText() );
-                String recipieName = editRecipieText.getText().toString();
-                if ( radioButton.getText().equals( "Ingredients" ) ) {
-                    if ( editRecipieText.length() != 0 ) {
-              //          insertItem( recipieName, selectedRecipieFolderID );
-                        editRecipieText.setText( "" );
-                    } else {
-                        toastMessage( "Please put something in the textbox!" );
-                    }
+                itemNameText = itemName.getText().toString();
+                purchasePriceText = purchasePrice.getText().toString();
+                projValueText = projValue.getText().toString();
+                datePurchasedText = datePurchased.getText().toString();
+                projProfitText = projProfit.getText().toString();
+
+                double purchasePrice = Double.valueOf(purchasePriceText);
+                double projValue = Double.valueOf(projValueText);
+//                double projProfit = Double.valueOf(projProfitText);
+//                double projProfitValue = 0.00;
+
+                double projProfitValue = projValue - purchasePrice;
+
+                if(itemNameText.length()!=0 && purchasePriceText != null && projValueText != null) {
+                    insertItem(itemNameText, datePurchasedText, purchasePrice, projValue, projProfitValue);
                 } else {
-                    if ( editRecipieText.length() != 0 ) {
-              //          insertRecipe( recipieName, selectedRecipieFolderID );
-                    }
+                    toastMessage( "Please put something in the textbox!" );
                 }
             }
         });
     }
 
-    /*
-    public void insertItem( String recipieName, int selectedRecipieFolderID ) {
+    public void insertItem( String itemNameText, String datePurchasedText, double purchasePrice,
+                            double projValue, double projProfit ) {
 
-        String lowerCaseRecipe = recipieName.toLowerCase();
+        String lowerCaseItemName = itemNameText.toLowerCase();
 
-        boolean insertData = mDatabaseHelper.addRecipieData( lowerCaseRecipe, null, "Y", selectedRecipieFolderID );
+        boolean insertData = mDatabaseHelper.addItemOwnedData( lowerCaseItemName, datePurchasedText, purchasePrice, projProfit, projValue, "N", null );
 
         if ( insertData ) {
             toastMessage( "Data successfully inserted!" );
 
-            Cursor data = mDatabaseHelper.getRecipieItemID( lowerCaseRecipe );
+            Cursor data = mDatabaseHelper.getItemId( lowerCaseItemName );
             int itemID = -1;
             while ( data.moveToNext() ) {
                 itemID = data.getInt(0);
             }
             toastMessage( "The recipieID is: " + itemID );
 
-            Intent intent = new Intent(RecipieInsert.this, IngredientLayoutScreen.class );
-            intent.putExtra("RecipieName", lowerCaseRecipe );
-            intent.putExtra("RecipieId", itemID );
-
+            Intent intent = new Intent(itemAdd.this, currentInventory.class );
+            intent.putExtra("ItemId", itemID );
             startActivity( intent );
         } else {
             toastMessage( "Something went wrong!" );
         }
-    }
-*/
-    /*
-    public void insertRecipe( String recipieName, int selectedRecipieFolderID ) {
-
-        String lowerCaseRecipe = recipieName.toLowerCase();
-
-        boolean insertData = mDatabaseHelper.addRecipieData( lowerCaseRecipe, null, "N", selectedRecipieFolderID );
-
-        if ( insertData ) {
-            toastMessage( "Data successfully inserted!" );
-
-            Cursor data = mDatabaseHelper.getRecipieItemID( lowerCaseRecipe );
-            int itemID = -1;
-            while ( data.moveToNext() ) {
-                itemID = data.getInt(0);
-            }
-            toastMessage( "The recipieID is: " + itemID );
-
-            Intent intent = new Intent(RecipieInsert.this, MainActivity.class );
-            intent.putExtra("RecipieName", lowerCaseRecipe );
-            intent.putExtra("RecipieId", itemID );
-            startActivity( intent );
-
-        } else {
-
-            toastMessage( "Something went wrong!" );
-        }
-    }
-*/
-    public void checkButton( View v ) {
-        int radioId = radioGroup.getCheckedRadioButtonId();
-        radioButton = findViewById( radioId );
-        toastMessage( "Selected radio Button: " + radioButton.getText() );
     }
 
     private void toastMessage( String message ) {

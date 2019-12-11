@@ -24,6 +24,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_IS_SOLD = "isSold";
     private static final String COLUMN_PRICE_SOLD = "priceSold";
     private static final String COLUMN_PRICE_PROFIT = "priceProfit";
+    private static final String COLUMN_PROJECTED_PRICE = "projPrice";
+    private static final String COLUMN_PROJECTED_VALUE = "projValue";
     private static final String COLUMN_DATE_SOLD = "dateSold";
     private static final String COLUMN_ITEM_NAME = "itemName";
     private static final String COLUMN_PLATFORM_TO_SELL_ON = "platformToSellOn";
@@ -78,22 +80,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addItemOwnedData(String item, String datePurchased, String pricePurchased, int daysOwned, String isSold, String priceSold, String priceProfit, String dateSold, String itemName, String platformToSellOn, String percentageOfCutTaken) {
+    public boolean addItemOwnedData(String itemName, String datePurchased, double pricePurchased, double projPrice, double projValue, String isSold, String dateSold) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_ITEM_ID, item);
+        contentValues.put(COLUMN_ITEM_NAME, itemName);
         contentValues.put(COLUMN_DATE_PURCHASED, datePurchased);
         contentValues.put(COLUMN_PRICE_PURCHASED, pricePurchased);
-        contentValues.put(COLUMN_DAYS_OWNED, daysOwned);
-        contentValues.put(COLUMN_IS_SOLD, isSold);
-        contentValues.put(COLUMN_PRICE_SOLD, priceSold);
-        contentValues.put(COLUMN_PRICE_PROFIT, priceProfit);
-        contentValues.put(COLUMN_DATE_SOLD, dateSold);
-        contentValues.put(COLUMN_ITEM_NAME, itemName);
-        contentValues.put(COLUMN_PLATFORM_TO_SELL_ON, platformToSellOn);
-        contentValues.put(COLUMN_PERCENTAGE_OF_CUT_TAKEN, percentageOfCutTaken);
+        contentValues.put(COLUMN_PROJECTED_PRICE, projPrice);
+        contentValues.put(COLUMN_PROJECTED_VALUE, projValue);
+        contentValues.put(COLUMN_IS_SOLD, isSold); //should be 'N' by default
+        contentValues.put(COLUMN_DATE_SOLD, dateSold); //should be null by default
 
-        Log.d(TAG, "addData: Adding " + item + " to " + TABLE_NAME);
+        Log.d(TAG, "addData: Adding " + itemName + " to " + TABLE_NAME);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
@@ -138,7 +136,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getItemId(String itemName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COLUMN_ITEM_ID + " FROM " + TABLE_NAME
+                + " WHERE " + COLUMN_ITEM_NAME + " = " + itemName + "";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
 
+    public Cursor getItemName(String itemId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELEC " + COLUMN_ITEM_NAME + " FROM " + TABLE_NAME
+                + " WHERE " + COLUMN_ITEM_ID + " = " + itemId + "";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
 
 
 }

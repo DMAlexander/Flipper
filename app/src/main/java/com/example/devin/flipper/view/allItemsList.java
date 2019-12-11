@@ -1,6 +1,7 @@
 package com.example.devin.flipper.view;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -8,8 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.devin.flipper.MainActivity;
 import com.example.devin.flipper.R;
 import com.example.devin.flipper.database.DatabaseHelper;
 
@@ -20,13 +24,23 @@ public class allItemsList extends AppCompatActivity {
     DatabaseHelper mDatabaseHelper;
     private allItemsAdapter mAdapter;
     RecyclerView recyclerView;
+    Button btnNavigate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_already_sold);
+        setContentView(R.layout.activity_all_items);
 
         mDatabaseHelper = new DatabaseHelper(this);
+        btnNavigate = (Button) findViewById(R.id.btnNavigate);
+
+        btnNavigate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(allItemsList.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
