@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
 
     }
 
@@ -56,9 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_IS_SOLD + " BOOLEAN, "
             + COLUMN_PRICE_SOLD + " REAL, "
             + COLUMN_PRICE_PROFIT + " REAL, "
-            + COLUMN_DATE_SOLD + " TEXT, "
-            + COLUMN_PLATFORM_TO_SELL_ON + " TEXT, "
-            + COLUMN_PERCENTAGE_OF_CUT_TAKEN + " TEXT ) ";
+            + COLUMN_DATE_SOLD + " TEXT ) ";
 
     private static final String createTable2 = "CREATE TABLE " + TABLE_NAME2 + " "
             + "( platID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -139,17 +137,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getItemId(String itemName) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COLUMN_ITEM_ID + " FROM " + TABLE_NAME
-                + " WHERE " + COLUMN_ITEM_NAME + " = " + itemName + "";
+                + " WHERE " + COLUMN_ITEM_NAME + " = '" + itemName + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
     }
 
     public Cursor getItemName(String itemId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELEC " + COLUMN_ITEM_NAME + " FROM " + TABLE_NAME
-                + " WHERE " + COLUMN_ITEM_ID + " = " + itemId + "";
+        String query = "SELECT " + COLUMN_ITEM_NAME + " FROM " + TABLE_NAME
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
         Cursor data = db.rawQuery(query, null);
         return data;
+    }
+
+    public void deleteItemRow(String itemId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE "
+                + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "deleteName: query: " + query);
+        db.execSQL(query);
+    }
+
+    public void updateitemName(String itemName, String itemId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME + " SET " + COLUMN_ITEM_NAME +
+                " = '" + itemName + "' WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "updateName: query: " + query);
+        db.execSQL(query);
+    }
+
+    /* Update statement hit when an item is sold */
+    public void updateForPurchase(int itemId, double priceSold, double priceProfit, String dateSold) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME
+                + "SET " + COLUMN_IS_SOLD + " = '" + "N"
+                + "' AND " + COLUMN_PRICE_SOLD + " = '" + priceSold
+                + "' AND " + COLUMN_PRICE_PROFIT + " = '" + priceProfit
+                + "' AND " + COLUMN_DATE_SOLD + " = '" + dateSold
+                + "' WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "updateForPurchase: query: " + query);
+        db.execSQL(query);
     }
 
 

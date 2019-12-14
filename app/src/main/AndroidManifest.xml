@@ -21,8 +21,9 @@
             android:name=".view.allItemsList"
             android:label="@string/title_activity_all_items"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.itemAdd"></activity>
-        <activity android:name=".view.currentInventory"></activity>
+        <activity android:name=".view.itemAdd" />
+        <activity android:name=".view.currentInventory" />
+        <activity android:name=".view.itemSold"></activity>
     </application>
 
 </manifest>

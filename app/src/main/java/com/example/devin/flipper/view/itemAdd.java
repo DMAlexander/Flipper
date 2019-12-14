@@ -42,16 +42,12 @@ public class itemAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_add);
-
         itemName = (EditText) findViewById(R.id.itemName);
         purchasePrice = (EditText) findViewById(R.id.purchPrice);
         projValue = (EditText) findViewById(R.id.projValue);
-
         datePurchased = (TextView) findViewById(R.id.datePurchased);
    //     projProfit = (TextView) findViewById(R.id.projProfit);
-
         btnAddItem = (Button) findViewById(R.id.btnAddItem);
-
         mDatabaseHelper = new DatabaseHelper(this );
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
@@ -104,9 +100,9 @@ public class itemAdd extends AppCompatActivity {
             }
             toastMessage( "The recipieID is: " + itemID );
 */
-//            Intent intent = new Intent(itemAdd.this, currentInventory.class );
-        //    intent.putExtra("ItemId", itemID );
-//            startActivity( intent );
+            Intent intent = new Intent(itemAdd.this, currentInventory.class );
+ //           intent.putExtra("ItemId", itemID );
+            startActivity( intent );
         } else {
             toastMessage( "Something went wrong!" );
         }

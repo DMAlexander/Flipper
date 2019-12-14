@@ -1,0 +1,96 @@
+package com.example.devin.flipper.view;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.devin.flipper.R;
+import com.example.devin.flipper.database.DatabaseHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class itemSold extends AppCompatActivity {
+
+    private static final String TAG = "itemSold";
+
+    DatabaseHelper mDatabaseHelper;
+    private EditText priceSold;
+    private TextView dateSold, itemName;
+    private Button btnAddSoldItem;
+    private int selectedItemID;
+    private String selectedItemName;
+    double priceSoldVal = 0;
+    double priceProfit = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_item_sold);
+
+        priceSold = (EditText) findViewById(R.id.priceSold);
+        dateSold = (TextView) findViewById(R.id.dateSold);
+        itemName = (TextView) findViewById(R.id.itemName);
+        btnAddSoldItem = (Button) findViewById(R.id.btnAddSoldItem);
+
+        Intent recievedIntent = getIntent();
+        selectedItemID = recievedIntent.getIntExtra("itemId", -1 );
+        selectedItemName = recievedIntent.getStringExtra("itemName");
+
+        itemName.setText(selectedItemName);
+
+        final double pricePurchased = 0; //Need to pass in this variable eventually...
+ //       String priceSoldText = priceSold.getText().toString();
+ //       final double priceSoldVal = Double.valueOf(priceSoldText);
+ //       String itemNameText = itemName.getText().toString();
+        final int itemId = 0;
+  //      final double priceProfit = pricePurchased - priceSoldVal;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
+        final String currentDate = sdf.format(new Date());
+        //   Date currentTime = Calendar.getInstance().getTime();
+        dateSold.setText(currentDate);
+
+        btnAddSoldItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent receivedIntent = getIntent();
+
+                String priceSoldText = priceSold.getText().toString();
+                double priceSoldVal = Double.valueOf(priceSoldText);
+                double priceProfit = pricePurchased - priceSoldVal;
+
+                if(priceSoldVal != 0) {
+                    updateForPurchase(itemId, priceSoldVal, priceProfit, currentDate);
+                } else {
+                    toastMessage( "Please put something in the textbox!" );
+                }
+
+            }
+        });
+    }
+
+    public void updateForPurchase( int itemId, double priceSoldVal, double priceProfit, String currentDate ) {
+
+        try {
+            mDatabaseHelper.updateForPurchase(itemId, priceSoldVal, priceProfit, currentDate);
+
+            Intent intent = new Intent(itemSold.this, alreadySold.class );
+            //           intent.putExtra("ItemId", itemID );
+            startActivity( intent );
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    private void toastMessage( String message ) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT ).show();
+    }
+
+}

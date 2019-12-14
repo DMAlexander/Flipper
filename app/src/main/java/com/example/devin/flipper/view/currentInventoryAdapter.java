@@ -31,15 +31,23 @@ public class currentInventoryAdapter extends RecyclerView.Adapter<currentInvento
     }
 
     public static class currentInventoryViewHolder extends RecyclerView.ViewHolder {
+        /*
         public TextView mRecipeIdView;
         public TextView mTextView1;
         public ImageView mDeleteImage;
+        */
+        public TextView mItemName, mCurrentDate, mPurchasePrice, mProjValue, mProjProfit;
 
         public currentInventoryViewHolder( final View itemView, final currentInventoryAdapter.OnItemClickListener listener ) {
             super( itemView );
      //       mRecipeIdView = itemView.findViewById( R.id.recipeId );
      //       mTextView1 = itemView.findViewById( R.id.recipe );
      //       mDeleteImage = itemView.findViewById( R.id.image_delete );
+            mItemName = itemView.findViewById(R.id.itemNameText);
+            mCurrentDate = itemView.findViewById(R.id.currentDate);
+            mPurchasePrice = itemView.findViewById(R.id.purchasePrice);
+            mProjValue = itemView.findViewById(R.id.projValue);
+            mProjProfit = itemView.findViewById(R.id.projProfit);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick( View view ) {
@@ -53,6 +61,7 @@ public class currentInventoryAdapter extends RecyclerView.Adapter<currentInvento
                 }
             });
 
+            /*
             mDeleteImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick( View view ) {
@@ -63,14 +72,14 @@ public class currentInventoryAdapter extends RecyclerView.Adapter<currentInvento
                         listener.onDeleteClick( position, recipeName, recipeId );
                     }
                 }
-            });
+            }); */
         }
     }
 
     @Override
     public currentInventoryAdapter.currentInventoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
         LayoutInflater inflater = LayoutInflater.from( mContext );
-        View view = inflater.inflate( R.layout.activity_current_inventory_screen, parent, false );
+        View view = inflater.inflate( R.layout.activity_current_inventory_item, parent, false );
         return new currentInventoryAdapter.currentInventoryViewHolder( view, mListener );
     }
 
@@ -80,11 +89,20 @@ public class currentInventoryAdapter extends RecyclerView.Adapter<currentInvento
             return;
         }
 
-        final String recipeId = mCursor.getString( mCursor.getColumnIndex("ExportedRecipeID" ) );
-        holder.mRecipeIdView.setText( recipeId );
+        final String itemName = mCursor.getString( mCursor.getColumnIndex("itemName"));
+        holder.mItemName.setText(itemName);
 
-        final String recipeName = mCursor.getString( mCursor.getColumnIndex("RecipieName" ) );
-        holder.mTextView1.setText( recipeName );
+        final String currentDate = mCursor.getString(mCursor.getColumnIndex("datePurchased"));
+        holder.mCurrentDate.setText(currentDate);
+
+        final String purchasePrice = mCursor.getString(mCursor.getColumnIndex("pricePurchased"));
+        holder.mPurchasePrice.setText(purchasePrice);
+
+        final String projValue = mCursor.getString(mCursor.getColumnIndex("projValue"));
+        holder.mProjValue.setText(projValue);
+
+        final String projProfit = mCursor.getString(mCursor.getColumnIndex("projPrice"));
+        holder.mProjProfit.setText(projProfit);
 
     }
 
