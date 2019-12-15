@@ -1,6 +1,7 @@
 package com.example.devin.flipper.view;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,12 +27,12 @@ public class itemSold extends AppCompatActivity {
     private Button btnAddSoldItem;
     private int selectedItemID;
     private String selectedItemName;
-    double priceSoldVal = 0;
-    double priceProfit = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_sold);
+
+        mDatabaseHelper = new DatabaseHelper(this );
 
         priceSold = (EditText) findViewById(R.id.priceSold);
         dateSold = (TextView) findViewById(R.id.dateSold);
@@ -42,14 +43,17 @@ public class itemSold extends AppCompatActivity {
         selectedItemID = recievedIntent.getIntExtra("itemId", -1 );
         selectedItemName = recievedIntent.getStringExtra("itemName");
 
+        Cursor data = mDatabaseHelper.getPricePurchased(selectedItemID);
+        String pricePurchasedStr = "";
+        while ( data.moveToNext() ) {
+            pricePurchasedStr = data.getString(0);
+        }
+
+        final int itemId = selectedItemID;
+
         itemName.setText(selectedItemName);
 
-        final double pricePurchased = 0; //Need to pass in this variable eventually...
- //       String priceSoldText = priceSold.getText().toString();
- //       final double priceSoldVal = Double.valueOf(priceSoldText);
- //       String itemNameText = itemName.getText().toString();
-        final int itemId = 0;
-  //      final double priceProfit = pricePurchased - priceSoldVal;
+        final double pricePurchased = Double.valueOf(pricePurchasedStr); //Need to pass in this variable eventually...
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
         final String currentDate = sdf.format(new Date());
@@ -63,7 +67,7 @@ public class itemSold extends AppCompatActivity {
 
                 String priceSoldText = priceSold.getText().toString();
                 double priceSoldVal = Double.valueOf(priceSoldText);
-                double priceProfit = pricePurchased - priceSoldVal;
+                double priceProfit = priceSoldVal -  pricePurchased;
 
                 if(priceSoldVal != 0) {
                     updateForPurchase(itemId, priceSoldVal, priceProfit, currentDate);
@@ -78,7 +82,10 @@ public class itemSold extends AppCompatActivity {
     public void updateForPurchase( int itemId, double priceSoldVal, double priceProfit, String currentDate ) {
 
         try {
-            mDatabaseHelper.updateForPurchase(itemId, priceSoldVal, priceProfit, currentDate);
+            mDatabaseHelper.updateIsSold(itemId);
+            mDatabaseHelper.updateDateSold(itemId, currentDate);
+            mDatabaseHelper.updatePriceProfit(itemId, priceProfit);
+            mDatabaseHelper.updatePriceSold(itemId, priceSoldVal);
 
             Intent intent = new Intent(itemSold.this, alreadySold.class );
             //           intent.putExtra("ItemId", itemID );

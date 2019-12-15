@@ -22,7 +22,7 @@
             />
 
         <TextView
-            android:id="@+id/currentDate"
+            android:id="@+id/dateSold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -33,34 +33,23 @@
             />
 
         <TextView
-            android:id="@+id/purchasePrice"
+            android:id="@+id/priceSold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/currentDate"
+            android:layout_toEndOf="@+id/dateSold"
             android:text="purPrice"
             android:textSize="15dp"
             android:layout_marginLeft="2dp"
             />
 
         <TextView
-            android:id="@+id/projValue"
+            android:id="@+id/priceProfit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/purchasePrice"
+            android:layout_toEndOf="@+id/priceSold"
             android:text="projValue"
-            android:textSize="15dp"
-            android:layout_marginLeft="2dp"
-            />
-
-        <TextView
-            android:id="@+id/projProfit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/projValue"
-            android:text="projProfit"
             android:textSize="15dp"
             android:layout_marginLeft="2dp"
             />

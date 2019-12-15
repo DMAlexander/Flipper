@@ -88,6 +88,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_PRICE_PURCHASED, pricePurchased); //What we bought it for
         contentValues.put(COLUMN_PROJECTED_PRICE, projPrice);       //What we think it's worth
         contentValues.put(COLUMN_PROJECTED_VALUE, projValue);       //The potental profit...
+        contentValues.put(COLUMN_IS_SOLD, "N");
+        contentValues.put(COLUMN_PRICE_SOLD, 0);
+        contentValues.put(COLUMN_PRICE_PROFIT, 0);
+        contentValues.put(COLUMN_DATE_SOLD, 0);
 
         Log.d(TAG, "addData: Adding " + itemName + " to " + TABLE_NAME);
 
@@ -150,6 +154,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getPricePurchased(int itemId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT " + COLUMN_PRICE_PURCHASED + " FROM " + TABLE_NAME
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
     public void deleteItemRow(String itemId) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME + " WHERE "
@@ -167,19 +179,60 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    /* Update statement hit when an item is sold */
-    public void updateForPurchase(int itemId, double priceSold, double priceProfit, String dateSold) {
+    public void updateIsSold(int itemId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String query = "UPDATE " + TABLE_NAME
-                + "SET " + COLUMN_IS_SOLD + " = '" + "N"
-                + "' AND " + COLUMN_PRICE_SOLD + " = '" + priceSold
-                + "' AND " + COLUMN_PRICE_PROFIT + " = '" + priceProfit
-                + "' AND " + COLUMN_DATE_SOLD + " = '" + dateSold
-                + "' WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+                + " SET " + COLUMN_IS_SOLD + " = " + "'Y'"
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
         Log.d(TAG, "updateForPurchase: query: " + query);
         db.execSQL(query);
     }
 
+    public void updatePriceSold(int itemId, double priceSoldVal) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME
+                + " SET " + COLUMN_PRICE_SOLD + " = '" + priceSoldVal + "'"
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "updateForPurchase: query: " + query);
+        db.execSQL(query);
+    }
+
+    public void updatePriceProfit(int itemId, double priceProfit) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME
+                + " SET " +  COLUMN_PRICE_PROFIT + " = '" + priceProfit + "'"
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "updateForPurchase: query: " + query);
+        db.execSQL(query);
+    }
+
+    public void updateDateSold(int itemId, String currentDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME
+                + " SET " + COLUMN_DATE_SOLD + " = " + currentDate
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "updateForPurchase: query: " + query);
+        db.execSQL(query);
+    }
+
+    /* Update statement hit when an item is sold */
+    /*
+    public void updateForPurchase(int itemId, double priceSold, double priceProfit, String dateSold) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME
+                + " SET " + COLUMN_IS_SOLD + " = " + "'Y'"
+                + ", " + COLUMN_PRICE_SOLD + " = '" + priceSold  + "'"
+                + ", " + COLUMN_PRICE_PROFIT + " = '" + priceProfit + "'"
+                + ", " + COLUMN_DATE_SOLD + " = '" + dateSold + "'"
+                + " WHERE " + COLUMN_ITEM_ID + " = '" + itemId + "'";
+        Log.d(TAG, "updateForPurchase: query: " + query);
+        db.execSQL(query);
+    }
+*/
 
 }

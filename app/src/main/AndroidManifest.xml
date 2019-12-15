@@ -23,7 +23,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.itemAdd" />
         <activity android:name=".view.currentInventory" />
-        <activity android:name=".view.itemSold"></activity>
+        <activity android:name=".view.itemSold" />
     </application>
 
 </manifest>

@@ -33,13 +33,19 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
     public static class alreadySoldViewHolder extends RecyclerView.ViewHolder {
         public TextView mRecipeIdView;
         public TextView mTextView1;
-        public ImageView mDeleteImage;
+//        public ImageView mDeleteImage;
+        public TextView mItemNameText, mDateSold, mPriceSold, mPriceProfit;
 
         public alreadySoldViewHolder( final View itemView, final alreadySoldAdapter.OnItemClickListener listener ) {
             super( itemView );
      //       mRecipeIdView = itemView.findViewById( R.id.recipeId );
      //       mTextView1 = itemView.findViewById( R.id.recipe );
      //       mDeleteImage = itemView.findViewById( R.id.image_delete );
+            mItemNameText = itemView.findViewById(R.id.itemNameText);
+            mDateSold = itemView.findViewById(R.id.dateSold);
+            mPriceSold = itemView.findViewById(R.id.priceSold);
+            mPriceProfit = itemView.findViewById(R.id.priceProfit);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick( View view ) {
@@ -52,7 +58,7 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
                     }
                 }
             });
-
+            /*
             mDeleteImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick( View view ) {
@@ -64,6 +70,7 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
                     }
                 }
             });
+            */
         }
     }
 
@@ -80,11 +87,17 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
             return;
         }
 
-        final String recipeId = mCursor.getString( mCursor.getColumnIndex("ExportedRecipeID" ) );
-        holder.mRecipeIdView.setText( recipeId );
+        final String itemName = mCursor.getString( mCursor.getColumnIndex("itemNameText"));
+        holder.mItemNameText.setText(itemName);
 
-        final String recipeName = mCursor.getString( mCursor.getColumnIndex("RecipieName" ) );
-        holder.mTextView1.setText( recipeName );
+        final String dateSold = mCursor.getString(mCursor.getColumnIndex("dateSold"));
+        holder.mDateSold.setText(dateSold);
+
+        final String priceSold = mCursor.getString(mCursor.getColumnIndex("priceSold"));
+        holder.mPriceSold.setText(priceSold);
+
+        final String priceProfit = mContext.getString(mCursor.getColumnIndex("priceProfit"));
+        holder.mPriceProfit.setText(priceProfit);
 
     }
 
