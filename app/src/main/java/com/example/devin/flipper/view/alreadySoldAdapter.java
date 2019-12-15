@@ -77,7 +77,7 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
     @Override
     public alreadySoldAdapter.alreadySoldViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
         LayoutInflater inflater = LayoutInflater.from( mContext );
-        View view = inflater.inflate( R.layout.activity_already_sold, parent, false );
+        View view = inflater.inflate( R.layout.activity_already_sold_item, parent, false );
         return new alreadySoldAdapter.alreadySoldViewHolder( view, mListener );
     }
 
@@ -87,7 +87,7 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
             return;
         }
 
-        final String itemName = mCursor.getString( mCursor.getColumnIndex("itemNameText"));
+        final String itemName = mCursor.getString( mCursor.getColumnIndex("itemName"));
         holder.mItemNameText.setText(itemName);
 
         final String dateSold = mCursor.getString(mCursor.getColumnIndex("dateSold"));
@@ -96,7 +96,7 @@ public class alreadySoldAdapter extends RecyclerView.Adapter<alreadySoldAdapter.
         final String priceSold = mCursor.getString(mCursor.getColumnIndex("priceSold"));
         holder.mPriceSold.setText(priceSold);
 
-        final String priceProfit = mContext.getString(mCursor.getColumnIndex("priceProfit"));
+        final String priceProfit = mCursor.getString(mCursor.getColumnIndex("priceProfit"));
         holder.mPriceProfit.setText(priceProfit);
 
     }
