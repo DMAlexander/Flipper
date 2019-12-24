@@ -66,7 +66,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 //    private static final String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " "
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTable);

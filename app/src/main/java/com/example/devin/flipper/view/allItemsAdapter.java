@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.example.devin.flipper.R;
 import com.example.devin.flipper.database.DatabaseHelper;
 
+import java.text.DecimalFormat;
+
 public class allItemsAdapter extends RecyclerView.Adapter<allItemsAdapter.allItemsViewHolder> {
 
     private allItemsAdapter.OnItemClickListener mListener;
@@ -88,6 +90,8 @@ public class allItemsAdapter extends RecyclerView.Adapter<allItemsAdapter.allIte
             return;
         }
 
+        DecimalFormat currency = new DecimalFormat("$##,###.##");
+
         final String itemName = mCursor.getString( mCursor.getColumnIndex("itemName"));
         holder.mItemName.setText(itemName);
 
@@ -117,13 +121,19 @@ public class allItemsAdapter extends RecyclerView.Adapter<allItemsAdapter.allIte
         holder.mCurrentDate.setText(currentDate);
 
         final String purchasePrice = mCursor.getString(mCursor.getColumnIndex("pricePurchased"));
-        holder.mPurchasePrice.setText(purchasePrice);
+        double purchasePriceVal = Double.valueOf(purchasePrice);
+        String purchPriceStr =  currency.format(purchasePriceVal);
+        holder.mPurchasePrice.setText(purchPriceStr);
 
         final String projValue = mCursor.getString(mCursor.getColumnIndex("projValue"));
-        holder.mProjValue.setText(projValue);
+        double projValueVal = Double.valueOf(projValue);
+        String projValStr = currency.format(projValueVal);
+        holder.mProjValue.setText(projValStr);
 
         final String projProfit = mCursor.getString(mCursor.getColumnIndex("projPrice"));
-        holder.mProjProfit.setText(projProfit);
+        double projProfitVal = Double.valueOf(projProfit);
+        String projProfitStr = currency.format(projProfitVal);
+        holder.mProjProfit.setText(projProfitStr);
 
     }
 

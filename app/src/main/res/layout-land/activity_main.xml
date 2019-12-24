@@ -92,8 +92,8 @@
                     android:id="@+id/iView1"
                     android:src="@drawable/ic_launcher_background"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="94dp"
+                    android:layout_height="44dp" />
 
                 <TextView
                     android:id="@+id/tView1"
@@ -132,8 +132,8 @@
                     android:id="@+id/iView2"
                     android:src="@drawable/ic_launcher_background"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="94dp"
+                    android:layout_height="44dp" />
 
                 <TextView
                     android:id="@+id/tView2"
@@ -172,8 +172,8 @@
                     android:id="@+id/iView3"
                     android:src="@drawable/ic_launcher_background"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="94dp"
+                    android:layout_height="44dp" />
 
                 <TextView
                     android:id="@+id/tView3"
@@ -212,8 +212,8 @@
                     android:id="@+id/iView4"
                     android:src="@drawable/ic_launcher_background"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="94dp"
+                    android:layout_height="44dp" />
 
                 <TextView
                     android:id="@+id/tView4"
