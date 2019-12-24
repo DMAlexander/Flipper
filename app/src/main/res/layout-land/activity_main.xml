@@ -137,7 +137,7 @@
 
                 <TextView
                     android:id="@+id/tView2"
-                    android:text="Already Sold"
+                    android:text="Sold Items"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="18dp"
@@ -177,7 +177,7 @@
 
                 <TextView
                     android:id="@+id/tView3"
-                    android:text="List New Item"
+                    android:text="New Item"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="18dp"
