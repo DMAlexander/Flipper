@@ -86,7 +86,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="79dp">
 
                 <ImageView
                     android:id="@+id/iView1"
@@ -126,7 +126,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="79dp">
 
                 <ImageView
                     android:id="@+id/iView2"
@@ -166,7 +166,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="79dp">
 
                 <ImageView
                     android:id="@+id/iView3"
@@ -206,7 +206,7 @@
                 android:layout_margin="16dp"
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="79dp">
 
                 <ImageView
                     android:id="@+id/iView4"
