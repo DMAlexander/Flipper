@@ -24,41 +24,6 @@
 
     </RelativeLayout>
 
-
-
-    <!--
-    <Button
-        android:id="@+id/btnAllRecipies"
-        android:layout_width="261dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="Recipes"
-        android:textSize="20dp"/>
-
-    <Button
-        android:id="@+id/recipeMenu"
-        android:layout_width="269dp"
-        android:layout_height="133dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="Menu"
-        android:textSize="20dp" />
-
-    <Button
-        android:id="@+id/btnShoppingCart"
-        android:layout_width="267dp"
-        android:layout_height="129dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Shopping List"
-        android:textSize="20dp" />
--->
-
     <GridLayout
         android:columnCount="2"
         android:rowCount="3"

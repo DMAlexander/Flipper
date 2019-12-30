@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.drawerActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +25,7 @@
         <activity android:name=".view.itemAdd" />
         <activity android:name=".view.currentInventory" />
         <activity android:name=".view.itemSold" />
-        <activity android:name=".view.HomeScreen"></activity>
+        <activity android:name=".view.HomeScreen" />
     </application>
 
 </manifest>
