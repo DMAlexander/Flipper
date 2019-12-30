@@ -24,6 +24,7 @@
         <activity android:name=".view.itemAdd" />
         <activity android:name=".view.currentInventory" />
         <activity android:name=".view.itemSold" />
+        <activity android:name=".view.HomeScreen"></activity>
     </application>
 
 </manifest>
