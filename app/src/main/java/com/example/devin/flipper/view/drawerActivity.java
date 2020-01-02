@@ -16,7 +16,7 @@ import com.example.devin.flipper.MainActivity;
 import com.example.devin.flipper.R;
 
 public class drawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private DrawerLayout drawer;
+    public DrawerLayout drawer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class drawerActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.nav_message:
-                Intent intent = new Intent(drawerActivity.this, currentInventory.class);
+                Intent intent = new Intent(drawerActivity.this, allItemsList.class);
                 startActivity(intent);
         }
 
