@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,7 @@ import com.example.devin.flipper.MainActivity;
 import com.example.devin.flipper.R;
 import com.example.devin.flipper.database.DatabaseHelper;
 
-public class allItemsList extends drawerActivity {
+public class allItemsList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "allItemsList";
 
@@ -31,6 +32,7 @@ public class allItemsList extends drawerActivity {
     private allItemsAdapter mAdapter;
     RecyclerView recyclerView;
     Button btnNavigate;
+    public DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,8 +129,20 @@ public class allItemsList extends drawerActivity {
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.nav_message:
-                Intent intent = new Intent(allItemsList.this, allItemsList.class);
+            case R.id.nav_inventory:
+                Intent intent = new Intent(allItemsList.this, currentInventory.class);
+                startActivity(intent);
+            case R.id.nav_already_sold:
+                intent = new Intent(allItemsList.this, alreadySold.class);
+                startActivity(intent);
+            case R.id.nav_all_items:
+                intent = new Intent(allItemsList.this, allItemsList.class);
+                startActivity(intent);
+            case R.id.nav_list_item:
+                intent = new Intent(allItemsList.this, itemAdd.class);
+                startActivity(intent);
+            case R.id.nav_item_sold:
+                intent = new Intent(allItemsList.this, itemSold.class);
                 startActivity(intent);
         }
 

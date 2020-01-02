@@ -2,30 +2,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_message"
-            android:icon="@drawable/ic_message"
-            android:title="Message" />
-        <item
-            android:id="@+id/nav_chat"
-            android:icon="@drawable/ic_chat"
-            android:title="Chat" />
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_profile"
-            android:title="Profile" />
+    <item android:title="Inventories">
+        <menu>
+            <item
+                android:id="@+id/nav_inventory"
+                android:icon="@drawable/ic_message"
+                android:title="Inventory" />
+            <item
+                android:id="@+id/nav_already_sold"
+                android:icon="@drawable/ic_chat"
+                android:title="Already Sold" />
+            <item
+                android:id="@+id/nav_all_items"
+                android:icon="@drawable/ic_profile"
+                android:title="All Items" />
+        </menu>
+    </item>
     </group>
 
     <item android:title="Other">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_list_item"
                 android:icon="@drawable/ic_share"
-                android:title="Share" />
+                android:title="List an Item" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_item_sold"
                 android:icon="@drawable/ic_send"
-                android:title="Send" />
+                android:title="Sell an Item" />
         </menu>
     </item>
 

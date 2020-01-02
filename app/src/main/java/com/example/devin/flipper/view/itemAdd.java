@@ -2,6 +2,7 @@ package com.example.devin.flipper.view;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class itemAdd extends AppCompatActivity {
     private TextView datePurchased, projProfit;
     private Button btnAddItem;
     String itemNameText, purchasePriceText, projValueText, datePurchasedText, projProfitText;
+    public DrawerLayout drawer;
 
     DecimalFormat currency = new DecimalFormat("$###,###.##");
 

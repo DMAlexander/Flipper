@@ -40,8 +40,20 @@ public class drawerActivity extends AppCompatActivity implements NavigationView.
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.nav_message:
-                Intent intent = new Intent(drawerActivity.this, allItemsList.class);
+            case R.id.nav_inventory:
+                Intent intent = new Intent(drawerActivity.this, currentInventory.class);
+                startActivity(intent);
+            case R.id.nav_already_sold:
+                intent = new Intent(drawerActivity.this, alreadySold.class);
+                startActivity(intent);
+            case R.id.nav_all_items:
+                intent = new Intent(drawerActivity.this, allItemsList.class);
+                startActivity(intent);
+            case R.id.nav_list_item:
+                intent = new Intent(drawerActivity.this, itemAdd.class);
+                startActivity(intent);
+            case R.id.nav_item_sold:
+                intent = new Intent(drawerActivity.this, itemSold.class);
                 startActivity(intent);
         }
 

@@ -37,8 +37,20 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.nav_message:
+            case R.id.nav_inventory:
                 Intent intent = new Intent(HomeScreen.this, currentInventory.class);
+                startActivity(intent);
+            case R.id.nav_already_sold:
+                intent = new Intent(HomeScreen.this, alreadySold.class);
+                startActivity(intent);
+            case R.id.nav_all_items:
+                intent = new Intent(HomeScreen.this, allItemsList.class);
+                startActivity(intent);
+            case R.id.nav_list_item:
+                intent = new Intent(HomeScreen.this, itemAdd.class);
+                startActivity(intent);
+            case R.id.nav_item_sold:
+                intent = new Intent(HomeScreen.this, itemSold.class);
                 startActivity(intent);
         }
 
