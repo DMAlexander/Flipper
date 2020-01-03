@@ -119,18 +119,23 @@ public class alreadySold extends AppCompatActivity implements NavigationView.OnN
             case R.id.nav_inventory:
                 Intent intent = new Intent(alreadySold.this, currentInventory.class);
                 startActivity(intent);
+                break;
             case R.id.nav_already_sold:
                 intent = new Intent(alreadySold.this, alreadySold.class);
                 startActivity(intent);
+                break;
             case R.id.nav_all_items:
                 intent = new Intent(alreadySold.this, allItemsList.class);
                 startActivity(intent);
+                break;
             case R.id.nav_list_item:
                 intent = new Intent(alreadySold.this, itemAdd.class);
                 startActivity(intent);
+                break;
             case R.id.nav_item_sold:
                 intent = new Intent(alreadySold.this, itemSold.class);
                 startActivity(intent);
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

@@ -119,18 +119,23 @@ public class currentInventory extends AppCompatActivity implements NavigationVie
             case R.id.nav_inventory:
                 Intent intent = new Intent(currentInventory.this, currentInventory.class);
                 startActivity(intent);
+                break;
             case R.id.nav_already_sold:
                 intent = new Intent(currentInventory.this, alreadySold.class);
                 startActivity(intent);
+                break;
             case R.id.nav_all_items:
                 intent = new Intent(currentInventory.this, allItemsList.class);
                 startActivity(intent);
+                break;
             case R.id.nav_list_item:
                 intent = new Intent(currentInventory.this, itemAdd.class);
                 startActivity(intent);
+                break;
             case R.id.nav_item_sold:
                 intent = new Intent(currentInventory.this, itemSold.class);
                 startActivity(intent);
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

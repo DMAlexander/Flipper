@@ -52,17 +52,9 @@ public class itemSold extends AppCompatActivity implements NavigationView.OnNavi
         selectedItemID = recievedIntent.getIntExtra("itemId", -1 );
         selectedItemName = recievedIntent.getStringExtra("itemName");
 
-        Cursor data = mDatabaseHelper.getPricePurchased(selectedItemID);
-        String pricePurchasedStr = "";
-        while ( data.moveToNext() ) {
-            pricePurchasedStr = data.getString(0);
-        }
-
         final int itemId = selectedItemID;
 
         itemName.setText(selectedItemName);
-
-        final double pricePurchased = Double.valueOf(pricePurchasedStr); //Need to pass in this variable eventually...
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault());
         final String currentDate = sdf.format(new Date());
@@ -72,6 +64,15 @@ public class itemSold extends AppCompatActivity implements NavigationView.OnNavi
         btnAddSoldItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Cursor data = mDatabaseHelper.getPricePurchased(selectedItemID);
+                String pricePurchasedStr = null;
+                while ( data.moveToNext() ) {
+                    pricePurchasedStr = data.getString(0);
+                }
+
+                final double pricePurchased = Double.valueOf(pricePurchasedStr); //Need to pass in this variable eventually...
+
                 Intent receivedIntent = getIntent();
 
                 String priceSoldText = priceSold.getText().toString();
@@ -127,18 +128,23 @@ public class itemSold extends AppCompatActivity implements NavigationView.OnNavi
             case R.id.nav_inventory:
                 Intent intent = new Intent(itemSold.this, currentInventory.class);
                 startActivity(intent);
+                break;
             case R.id.nav_already_sold:
                 intent = new Intent(itemSold.this, alreadySold.class);
                 startActivity(intent);
+                break;
             case R.id.nav_all_items:
                 intent = new Intent(itemSold.this, allItemsList.class);
                 startActivity(intent);
+                break;
             case R.id.nav_list_item:
                 intent = new Intent(itemSold.this, itemAdd.class);
                 startActivity(intent);
+                break;
             case R.id.nav_item_sold:
                 intent = new Intent(itemSold.this, itemSold.class);
                 startActivity(intent);
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

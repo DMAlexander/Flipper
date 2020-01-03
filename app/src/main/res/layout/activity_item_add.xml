@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.itemAdd">
-
-    <android.support.v4.widget.DrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,6 +29,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <EditText
+                    android:id="@+id/itemName"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:hint="Item Name" />
+
+                <TextView
+                    android:id="@+id/datePurchased"
+                    android:layout_width="201dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="150dp"
+                    android:gravity="center"
+                    android:hint="Date Purchased" />
+
+                <EditText
+                    android:id="@+id/purchPrice"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="250dp"
+                    android:gravity="center"
+                    android:hint="Purchase Price" />
+
+                <EditText
+                    android:id="@+id/projValue"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="350dp"
+                    android:gravity="center"
+                    android:hint="Projected Value" />
+
+                <Button
+                    android:id="@+id/btnAddItem"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="450dp"
+                    android:gravity="center"
+                    android:text="Add item" />
+
             </FrameLayout>
 
         </LinearLayout>
@@ -48,85 +86,6 @@
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/drawer_menu" />
 
-    </android.support.v4.widget.DrawerLayout>
-
-    <EditText
-        android:id="@+id/itemName"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginBottom="425dp"
-        android:gravity="center"
-        android:hint="Item Name"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="41dp" />
-
-    <TextView
-        android:id="@+id/datePurchased"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="98dp"
-        android:layout_marginTop="146dp"
-        android:gravity="center"
-        android:hint="Date Purchased"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="128dp" />
-
-    <EditText
-        android:id="@+id/purchPrice"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="101dp"
-        android:layout_marginBottom="252dp"
-        android:gravity="center"
-        android:hint="Purchase Price"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="219dp" />
-
-    <EditText
-        android:id="@+id/projValue"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="299dp"
-        android:gravity="center"
-        android:hint="Projected Value"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="298dp" />
-<!--
-    <TextView
-        android:id="@+id/projProfit"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="99dp"
-        android:layout_marginTop="384dp"
-        android:gravity="center"
-        android:hint="projected Profit"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="128dp" />
--->
-    <Button
-        android:id="@+id/btnAddItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:text="Add item" />
+</android.support.v4.widget.DrawerLayout>
 
 
-</RelativeLayout>
