@@ -69,6 +69,33 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         baseAssetsLabel = findViewById(R.id.baseAssetsLabel);
         liquidAssetsLabel = findViewById(R.id.liquidAssetsLabel);
 
+        /*
+        Cursor data = mDatabaseHelper.getItemId( lowerCaseItemName );
+        int itemID = -1;
+        while ( data.moveToNext() ) {
+            itemID = data.getInt(0);
+        }
+        */
+
+        double base = 100.00;
+        String baseStr = Double.toString(base);
+        baseAssets.setText(baseStr);
+
+        double liquid = 100.00;
+        String liquidStr = Double.toString(liquid);
+        liquidAssets.setText(liquidStr);
+
+        double totalAssetsDouble = base + liquid;
+        String totalAssetsStr = Double.toString(totalAssetsDouble);
+        totalAssets.setText(totalAssetsStr);
+
+        /*
+        itemNameText = itemName.getText().toString();
+        purchasePriceText = purchasePrice.getText().toString();
+        projValueText = projValue.getText().toString();
+        */
+        // totalAssets = baseAssets + totalItemsOwnedValue + liquidAssets
+
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
