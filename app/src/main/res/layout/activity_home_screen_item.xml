@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp">
+
+        <TextView
+            android:id="@+id/itemNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="itemName"
+            android:textSize="15dp"
+            android:layout_margin="2dp"
+            />
+
+        <TextView
+            android:id="@+id/currentDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/itemNameText"
+            android:text="currentDate"
+            android:textSize="15dp"
+            android:layout_marginLeft="2dp"
+            />
+
+        <TextView
+            android:id="@+id/purchasePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/currentDate"
+            android:text="purPrice"
+            android:textSize="15dp"
+            android:layout_marginLeft="2dp"
+            />
+
+        <TextView
+            android:id="@+id/projValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/purchasePrice"
+            android:text="projValue"
+            android:textSize="15dp"
+            android:layout_marginLeft="2dp"
+            />
+
+        <TextView
+            android:id="@+id/projProfit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/projValue"
+            android:text="projProfit"
+            android:textSize="15dp"
+            android:layout_marginLeft="2dp"
+            />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

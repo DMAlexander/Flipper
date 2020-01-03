@@ -37,10 +37,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/baseAssetsLabel"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Base Assets:"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="25dp" />
+
+                <TextView
+                    android:id="@+id/baseAssets"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="Base Assets"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="50dp" />
+
+                <TextView
+                    android:id="@+id/liquidAssetsLabel"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Base Assets:"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="75dp" />
+
+                <TextView
+                    android:id="@+id/liquidAssets"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="Liquid Assets"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="100dp" />
+
+                <TextView
+                    android:id="@+id/totalAssetsLabel"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Total Assets:"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="125dp" />
+
+                <TextView
+                    android:id="@+id/totalAssets"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="Total Assets"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="150dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="200dp"
+                    android:background="@android:color/darker_gray"
+                    android:padding="4dp"
+                    android:scrollbars="vertical" />
             </FrameLayout>
 
         </LinearLayout>
-
+<!--
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
@@ -48,49 +110,7 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/drawer_menu" />
-
+-->
     </android.support.v4.widget.DrawerLayout>
-
-    <TextView
-        android:id="@+id/totalAssets"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:hint="Total Assets"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="58dp" />
-
-    <TextView
-        android:id="@+id/base"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:hint="Base Assets"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="138dp" />
-
-    <TextView
-        android:id="@+id/liquidAssets"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:hint="Liquid Assets"
-        tools:layout_editor_absoluteX="92dp"
-        tools:layout_editor_absoluteY="224dp" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:padding="4dp"
-        android:scrollbars="vertical" />
 
 </LinearLayout>
