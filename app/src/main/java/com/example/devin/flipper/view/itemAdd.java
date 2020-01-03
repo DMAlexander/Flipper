@@ -134,8 +134,12 @@ public class itemAdd extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.nav_home_screen:
+                Intent intent = new Intent(itemAdd.this, HomeScreen.class);
+                startActivity(intent);
+                break;
             case R.id.nav_inventory:
-                Intent intent = new Intent(itemAdd.this, currentInventory.class);
+                intent = new Intent(itemAdd.this, currentInventory.class);
                 startActivity(intent);
                 break;
             case R.id.nav_already_sold:

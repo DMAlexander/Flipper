@@ -129,8 +129,12 @@ public class allItemsList extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.nav_home_screen:
+                Intent intent = new Intent(allItemsList.this, HomeScreen.class);
+                startActivity(intent);
+                break;
             case R.id.nav_inventory:
-                Intent intent = new Intent(allItemsList.this, currentInventory.class);
+                intent = new Intent(allItemsList.this, currentInventory.class);
                 startActivity(intent);
                 break;
             case R.id.nav_already_sold:
