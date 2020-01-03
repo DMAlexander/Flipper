@@ -31,7 +31,6 @@ public class allItemsList extends AppCompatActivity implements NavigationView.On
     DatabaseHelper mDatabaseHelper;
     private allItemsAdapter mAdapter;
     RecyclerView recyclerView;
-    Button btnNavigate;
     public DrawerLayout drawer;
 
     @Override
@@ -40,15 +39,6 @@ public class allItemsList extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_all_items);
 
         mDatabaseHelper = new DatabaseHelper(this);
-        btnNavigate = (Button) findViewById(R.id.btnNavigate);
-
-        btnNavigate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(allItemsList.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         recyclerView = findViewById(R.id.rv);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
