@@ -12,15 +12,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.devin.flipper.R;
 import com.example.devin.flipper.database.DatabaseHelper;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,6 +39,8 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     DatabaseHelper mDatabaseHelper;
     RecyclerView recyclerView;
     private HomeScreenAdapter mAdapter;
+    private List<String> listItem;
+    ArrayList list = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,13 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
             itemID = data.getInt(0);
         }
         */
+
+
+
+        Cursor data2 = mDatabaseHelper.getAllItemNames();
+        while (data2.moveToNext()) {
+            list.add(data2.getString(0));
+        }
 
         double base = 100.00;
         String baseStr = Double.toString(base);
@@ -148,6 +162,25 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        for (int i=0; i<list.size(); i++) {
+            menu.add(0, i, Menu.NONE, list.get(i).toString());
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        for (int i=0; i< list.size(); i++) {
+            if (i == item.getItemId()) {
+                Toast.makeText(getApplicationContext(), list.get(i).toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        return true;
     }
 
     private Cursor getAllItems() {
