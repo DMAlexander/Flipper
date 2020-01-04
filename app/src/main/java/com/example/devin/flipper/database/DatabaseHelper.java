@@ -16,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Tables
     private static final String TABLE_NAME = "items_owned_table";
     private static final String TABLE_NAME2 = "platforms_table";
+    private static final String TABLE_NAME3 = "base_assets_table";
  //   private static final String TABLE_NAME3 = "tax_table";
     //Table 1 variables
     private static final String COLUMN_ITEM_ID = "ID";
@@ -36,13 +37,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PLATFORM_NAME = "platformName";
     private static final String COLUMN_SALES_TAX = "salesTax";
     private static final String COLUMN_PERCENTAGE_CUT = "percentageCut";
-    //Table 3 variables
+    //Table 4 variables
     private static final String COlUMN_SALES_TAX_QUARTER = "salesTaxQuarter";
     private static final String COLUMN_SALES_TAX_PER_QUARTER = "salesTaxPerQuarter";
+    //Table 3 variables
+    private static final String COLUMN_BASE_ASSETS = "baseAssets";
+    private static final String COLUMN_LIQUID_ASSETS = "liquidAssets";
+    private static final String COLUMN_TOTAL_ASSETS = "totalAssets";
 
     public DatabaseHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 6);
 
     }
 
@@ -65,17 +70,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             COLUMN_PERCENTAGE_CUT + " REAL )";
 
 //    private static final String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " "
+    private static final String createTable3 = "CREATE TABLE " + TABLE_NAME3 + " "
+        + "( platID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+        COLUMN_BASE_ASSETS + " REAL, " +
+        COLUMN_LIQUID_ASSETS + " REAL, " +
+        COLUMN_TOTAL_ASSETS + " REAL )";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTable);
         db.execSQL(createTable2);
+        db.execSQL(createTable3);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int il) {
         db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME2);
+        db.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME3);
         onCreate(db);
     }
 
@@ -113,6 +125,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "addData: Adding " + platformName + " to " + TABLE_NAME2);
 
         long result = db.insert(TABLE_NAME2, null, contentValues);
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean addBaseAssetData(double baseAssets, double liquidAssets, double totalAssets) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_BASE_ASSETS, baseAssets);
+        contentValues.put(COLUMN_LIQUID_ASSETS, liquidAssets);
+        contentValues.put(COLUMN_TOTAL_ASSETS, totalAssets);
+
+        Log.d(TAG, "addData: Adding " + baseAssets + " to " + TABLE_NAME3);
+
+        long result = db.insert(TABLE_NAME3, null, contentValues);
 
         if (result == -1) {
             return false;
@@ -164,6 +194,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllItemNames() {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT " + COLUMN_ITEM_NAME + " FROM " + TABLE_NAME + "";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    public Cursor getBaseAssetValues() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME3;
         Cursor data = db.rawQuery(query, null);
         return data;
     }

@@ -41,21 +41,42 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     RecyclerView recyclerView;
     private HomeScreenAdapter mAdapter;
     private List<String> listItem;
-    ArrayList list = new ArrayList();
+    ArrayList list1 = new ArrayList();
+    ArrayList list2 = new ArrayList();
+    ArrayList list3 = new ArrayList();
+    ArrayList list4 = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        mDatabaseHelper = new DatabaseHelper(this);
+
+      //  addBaseAssetData(
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mDatabaseHelper = new DatabaseHelper(this);
+    //    recyclerView = findViewById(R.id.recyclerView);
+    //    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        /*
+        Cursor data4 = mDatabaseHelper.getItemsOwned();
+        String itemId = null;
+        while (data4.moveToNext()) {
+            itemId = data4.getString(0);
+        }
+        if(itemId != null) {
+            mAdapter = new HomeScreenAdapter(this, getAllItems());
+        } else {
+        }
+        recyclerView.setAdapter(mAdapter);
+        */
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new HomeScreenAdapter(this, getAllItems() );
+        mAdapter = new HomeScreenAdapter(this, getAllItems());
         recyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new HomeScreenAdapter.OnItemClickListener() {
@@ -85,13 +106,27 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         }
         */
 
+        Cursor data3 = mDatabaseHelper.getBaseAssetValues();
+        while (data3.moveToNext()) {
+            list2.add(data3.getString(0));
+            baseAssets.setText(data3.getString(1));
+            liquidAssets.setText(data3.getString(2));
+            totalAssets.setText(data3.getString(3));
+        }
+        if(list2.size()<1) {
+            mDatabaseHelper.addBaseAssetData(0.00, 0.00, 0);
+            baseAssets.setText("$0.00");
+            liquidAssets.setText("$0.00");
+            totalAssets.setText("$0.00");
+        }
 
 
         Cursor data2 = mDatabaseHelper.getAllItemNames();
         while (data2.moveToNext()) {
-            list.add(data2.getString(0));
+            list1.add(data2.getString(0));
         }
 
+        /*
         double base = 100.00;
         String baseStr = Double.toString(base);
         baseAssets.setText(baseStr);
@@ -103,6 +138,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         double totalAssetsDouble = base + liquid;
         String totalAssetsStr = Double.toString(totalAssetsDouble);
         totalAssets.setText(totalAssetsStr);
+        */
 
         /*
         itemNameText = itemName.getText().toString();
@@ -168,20 +204,18 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.clear();
-        SubMenu sub = menu.addSubMenu("List Item");
-        SubMenu sub2 = menu.addSubMenu("Sell Item");
-        for (int i=0; i<list.size(); i++) {
-            sub.add(0, i, Menu.NONE, list.get(i).toString());
-            sub2.add(0, i, Menu.NONE, list.get(i).toString());
+        SubMenu sub = menu.addSubMenu("Sell Item");
+        for (int i=0; i<list1.size(); i++) {
+            sub.add(0, i, Menu.NONE, list1.get(i).toString());
         }
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        for (int i=0; i< list.size(); i++) {
+        for (int i=0; i< list1.size(); i++) {
             if (i == item.getItemId()) {
-                Toast.makeText(getApplicationContext(), list.get(i).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), list1.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
         }
         return true;
