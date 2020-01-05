@@ -139,10 +139,6 @@ public class allItemsList extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(allItemsList.this, itemAdd.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_item_sold:
-                intent = new Intent(allItemsList.this, itemSold.class);
-                startActivity(intent);
-                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

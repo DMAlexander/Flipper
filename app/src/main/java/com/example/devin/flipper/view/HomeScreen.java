@@ -180,10 +180,6 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
                 intent = new Intent(HomeScreen.this, itemAdd.class);
                 startActivity(intent);
                 break;
-            case R.id.nav_item_sold:
-                intent = new Intent(HomeScreen.this, itemSold.class);
-                startActivity(intent);
-                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
