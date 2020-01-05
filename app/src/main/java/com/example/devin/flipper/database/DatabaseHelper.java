@@ -43,11 +43,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Table 3 variables
     private static final String COLUMN_BASE_ASSETS = "baseAssets";
     private static final String COLUMN_LIQUID_ASSETS = "liquidAssets";
+    private static final String COLUMN_OWNED_ITEM_ASSETS = "ownedItemAssets";
     private static final String COLUMN_TOTAL_ASSETS = "totalAssets";
 
     public DatabaseHelper(Context context) {
 
-        super(context, DATABASE_NAME, null, 6);
+        super(context, DATABASE_NAME, null, 7);
 
     }
 
@@ -74,6 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         + "( platID INTEGER PRIMARY KEY AUTOINCREMENT, " +
         COLUMN_BASE_ASSETS + " REAL, " +
         COLUMN_LIQUID_ASSETS + " REAL, " +
+        COLUMN_OWNED_ITEM_ASSETS + " REAL, " +
         COLUMN_TOTAL_ASSETS + " REAL )";
 
     @Override
@@ -261,6 +263,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "updateForPurchase: query: " + query);
         db.execSQL(query);
     }
+
+    public void updateBaseAssets(double baseAssets) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME3
+                + " SET " + COLUMN_BASE_ASSETS + " = '" + baseAssets + "'";
+        Log.d(TAG, "updateBaseAssets: query: " + query);
+        db.execSQL(query);
+    }
+
+    public void updateLiquidAssets(double liquidAssets) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME3
+                + " SET " + COLUMN_LIQUID_ASSETS + " = '" + liquidAssets + "'";
+        Log.d(TAG, "updateBaseAssets: query: " + query);
+        db.execSQL(query);
+    }
+
+    public void updateOwnedItemAssetsValues(double ownedItemAssets) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME3
+                + " SET " + COLUMN_OWNED_ITEM_ASSETS + " = '" + ownedItemAssets + "'";
+        Log.d(TAG, "updateBaseAssets: query: " + query);
+        db.execSQL(query);
+    }
+
+    public void updateTotalAssets(double totalAssets) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_NAME3
+                + " SET " + COLUMN_TOTAL_ASSETS + " = '" + totalAssets + "'";
+        Log.d(TAG, "updateBaseAssets: query: " + query);
+        db.execSQL(query);
+    }
+
 
     /* Update statement hit when an item is sold */
     /*

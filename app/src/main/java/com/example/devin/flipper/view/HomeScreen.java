@@ -208,6 +208,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
         for (int i=0; i<list1.size(); i++) {
             sub.add(0, i, Menu.NONE, list1.get(i).toString());
         }
+        menu.add("Modify Base Assets");
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -217,6 +218,10 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
             if (i == item.getItemId()) {
                 Toast.makeText(getApplicationContext(), list1.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
+        }
+        if(item.getTitle().equals("Modify Base Assets")) {
+            Intent intent = new Intent(HomeScreen.this, baseAssets.class);
+            startActivity(intent);
         }
         return true;
     }
