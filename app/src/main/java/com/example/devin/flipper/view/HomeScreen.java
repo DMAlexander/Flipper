@@ -111,7 +111,7 @@ public class HomeScreen extends AppCompatActivity implements NavigationView.OnNa
             list2.add(data3.getString(0));
             baseAssets.setText(data3.getString(1));
             liquidAssets.setText(data3.getString(2));
-            totalAssets.setText(data3.getString(3));
+            totalAssets.setText(data3.getString(4));
         }
         if(list2.size()<1) {
             mDatabaseHelper.addBaseAssetData(0.00, 0.00, 0);

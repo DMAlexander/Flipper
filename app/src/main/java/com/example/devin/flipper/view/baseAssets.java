@@ -34,11 +34,12 @@ public class baseAssets extends AppCompatActivity {
 
                 try {
                     String baseAssetsStr = baseAssets.getText().toString();
-                    final double baseAssetsVal = Double.parseDouble(baseAssetsStr);
+                    double baseAssetsVal = Double.parseDouble(baseAssetsStr);
                     String liquidAssetsStr = liquidAssets.getText().toString();
-                    final double liquidAssetsVal = Double.parseDouble(liquidAssetsStr);
-                    final double ownedItemAssetsValues = 100.00;
-                    final double totalAssets = baseAssetsVal + ownedItemAssetsValues + liquidAssetsVal;
+                    double liquidAssetsVal = Double.parseDouble(liquidAssetsStr);
+                    String ownedItemAssetsValueStr = ownedItemAssets.getText().toString();
+                    double ownedItemAssetsValues = Double.parseDouble(ownedItemAssetsValueStr);
+                    double totalAssets = baseAssetsVal + ownedItemAssetsValues + liquidAssetsVal;
 
                     mDatabaseHelper.updateBaseAssets(baseAssetsVal);
                     mDatabaseHelper.updateLiquidAssets(liquidAssetsVal);
